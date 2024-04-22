@@ -25,7 +25,8 @@
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
 
-          <data android:scheme="https" android:host="eluniverso.com" android:path='/auth' />
+          <data android:scheme="myapp" android:host="com.descope" />
+          <!-- <data android:scheme="https" android:host="clickingstudio.com" /> -->
         </intent-filter>
       </activity>
     </application>
