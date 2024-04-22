@@ -20,17 +20,23 @@ export const MyApp = () => {
     }, [])
 
     useEffect(() => {
-        let url = new URL('https://eluniverso.com')
-        Linking.addEventListener("url", async (event) => {
-            if (event.url === '') {
-                // This path needs to correspond to the deep link you configured in your manifest - see below
-                try {
-                    await flow.exchange(event.url) // Call exchange to complete the flow
-                } catch (e) {
-                    // Handle errors here
+        try {
+            Linking.addEventListener("url", async (event) => {
+                if (event.url.includes('myapp://com.descope')) {
+                    const path = event.url.replace('myapp://com.descope', 'https://clickingstudio.com/')
+                    // This path needs to correspond to the deep link you configured in your manifest - see below
+                    try {
+                        await flow.exchange(path) // Call exchange to complete the flow
+                    } catch (e) {
+                        console.log("error exchange", e)
+                        // Handle errors here
+                    }
                 }
-            }
-        })
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
         return () => {
             Linking.removeAllListeners('url')
         }
@@ -38,10 +44,8 @@ export const MyApp = () => {
 
     const startFlow = async () => {
         try {
-            console.log("entro try")
-            const resp = await flow.start('https://auth.descope.io/login/P2f0pWMfaRDURQTKJS5i9e8VoR1t', 'https://eluniverso.com')
-            console.log(resp)
-
+            const resp = await flow.start('https://auth.descope.io/login/P2fHstztcG2djwHobwhVDudiHSgN', 'myapp://com.descope')
+            console.log("resp", resp)
             await manageSession(resp.data)
         } catch (e) {
             // handle errors

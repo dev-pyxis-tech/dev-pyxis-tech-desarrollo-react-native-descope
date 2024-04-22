@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <AuthProvider
-      projectId='P2f0pWMfaRDURQTKJS5i9e8VoR1t'
+      projectId='P2fHstztcG2djwHobwhVDudiHSgN'
     >
       <MyApp />
     </AuthProvider>
