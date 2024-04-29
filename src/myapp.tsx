@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { useFlow, useSession, useDescope } from '@descope/react-native-sdk';
-import { Button, Linking, SafeAreaView, Text, View } from 'react-native';
+import { Button, Linking, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
 export const MyApp = () => {
@@ -69,11 +69,73 @@ export const MyApp = () => {
                     <Button onPress={handleLogout} title="Logout" />
                 </SafeAreaView>
             ) : (
-                <SafeAreaView>
-                    <Text>Welcome!</Text>
-                    <Button onPress={startFlow} title="Start Flow" />
+                <SafeAreaView >
+                    <View style={styles.container}>
+                        <Text style={styles.title}>Welcome!</Text>
+                        <TextInput style={styles.textInput} placeholder="Username" />
+                        <TextInput style={styles.textInput} placeholder="Password" />
+                        <TouchableOpacity onPress={exampleFetch} style={styles.btnLogin}>
+                            <Text style={{ color: 'white' }}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <TouchableOpacity onPress={startFlow} style={styles.btnLogin2}>
+                            <Text style={{ color: 'white' }}>Login with Descope</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* <Button onPress={startFlow} title="Otras formas de Iniciar Sesión" /> */}
                 </SafeAreaView>
             )}
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+    },
+    title: {
+        fontSize: 30,
+        textAlign: 'center',
+        margin: 10,
+    },
+    textInput: {
+        height: 40,
+        width: 200,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        marginVertical: 5,
+    },
+    btnLogin: {
+        backgroundColor: 'blue',
+        color: 'white',
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 5,
+    },
+    btnLogin2: {
+        backgroundColor: '#123456',
+        color: 'white',
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 5,
+        width: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+});
+
